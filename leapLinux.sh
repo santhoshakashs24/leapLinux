@@ -257,6 +257,18 @@ echo ""
 pkill -f "mountain_ghost_eternal" 2>/dev/null
 sleep 1
 
+# Function to handle ghost banishment
+banish_ghost() {
+    echo ""
+    echo "🧙‍♂️ The ancient rites have been performed..."
+    echo "💨 The mountain ghost has been banished from this realm!"
+    echo "🪦 Rest in peace, PID: $GHOST_PID"
+    exit 0
+}
+
+# Trap SIGINT and SIGTERM to banish ghost gracefully
+trap banish_ghost SIGINT SIGTERM
+
 # Create the ghost process with unique signature visible in ps
 bash -c 'while true; do echo "mountain_ghost_eternal_$(date +%s)" > /dev/null; sleep 3; done' &
 
@@ -275,6 +287,10 @@ echo "   2. Destroy it: kill $GHOST_PID"
 echo "   3. Verify victory: ps aux | grep mountain_ghost_eternal"
 echo ""
 echo "🏴‍☠️ May your process control skills prove strong, brave warrior!"
+
+# Wait for ghost process to be killed
+wait $GHOST_PID
+banish_ghost
 EOF
 
 chmod +x summon_ghost.sh
