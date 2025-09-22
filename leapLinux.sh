@@ -263,6 +263,8 @@ banish_ghost() {
     echo "🧙‍♂️ The ancient rites have been performed..."
     echo "💨 The mountain ghost has been banished from this realm!"
     echo "🪦 Rest in peace, PID: $GHOST_PID"
+    
+    echo "Now try to find the secret hidden in the mountain..."
     exit 0
 }
 
